@@ -2,16 +2,33 @@ import './App.css';
 
 import React, { Component } from 'react'
 
+
+const field = document.getElementById('generated_pswd')
+const length_field = document.getElementById('lengthField');
 export default class App extends Component {
+  constructor(){
+    super()
+    this.state={
+      field: document.getElementById('generated_pswd')
+    }
+    console.log(this.state.field)
+  }
+  componentDidMount() {
+    // Runs when the the component is mounded
+    const phrase_field = document.getElementById('phraseField')
+    if (!(phrase_field.value)) {
+      // If the passphrase field was empty, then a default text shall be displayed
+      try {
+        document.getElementById('generated_pswd').innerHTML = 'fill the passphrase field'
+      } catch (err) {
+        console.error("can't set default text to generated_pswd")
+      }
+    }
+  }
   clearField = () => {
   }
   formula = (event) => {
-    let phrase_field = document.getElementById('phraseField')
-    let length_field = document.getElementById('lengthField');
-    let generated_pswd = document.getElementById('generated_pswd');
-    let passphrase = phrase_field.value;
-    let size = length_field.value.length;
-    
+    this.setState.field.innerHTML = 'fa'
   }
   render() {
     return (
