@@ -1,17 +1,12 @@
 import './App.css';
 
 import React, { Component } from 'react'
-
-
-const field = document.getElementById('generated_pswd')
-const length_field = document.getElementById('lengthField');
 export default class App extends Component {
   constructor(){
-    super()
+    super();
     this.state={
-      field: document.getElementById('generated_pswd')
+      passwordFieldIsEmpty: true
     }
-    console.log(this.state.field)
   }
   componentDidMount() {
     // Runs when the the component is mounded
@@ -19,16 +14,32 @@ export default class App extends Component {
     if (!(phrase_field.value)) {
       // If the passphrase field was empty, then a default text shall be displayed
       try {
-        document.getElementById('generated_pswd').innerHTML = 'fill the passphrase field'
+        // document.getElementById('generated_pswd').innerHTML = 'fill the passphrase field'
       } catch (err) {
         console.error("can't set default text to generated_pswd")
       }
     }
   }
   clearField = () => {
+    document.getElementById('generated_pswd').innerHTML = ''
+    document.getElementById('phraseField').value = ''
+    document.getElementById('lengthField').value = ''
   }
   formula = (event) => {
-    this.setState.field.innerHTML = 'fa'
+    //Set customised value in field
+    const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+    const field = document.getElementById('generated_pswd')
+    const phrase_field = document.getElementById('phraseField')
+    const length_field = document.getElementById('lengthField')
+    for (let i = 0; i <= phrase_field.value.length; i++) {
+      for (let k = 0; k <= alphabet.length; k++) {
+        let charCodeArr = [];
+        if (phrase_field.value[i].toUpperCase() === alphabet[k]) {
+          // field.innerHTML += alphabet.indexOf(phrase_field.value[i].toUpperCase()) + 1 + Number(length_field.value) + " "
+          field.innerHTML += phrase_field.value[i].charCodeAt(0)+Number(length_field.value)+" "
+        }
+      }
+    }
   }
   render() {
     return (
@@ -47,17 +58,15 @@ export default class App extends Component {
             <label htmlFor="" className="s-chars">Include special characters</label>
             <input type="checkbox" className='justify-self-start' />
           </section>
-          <section>
+          <section className='space-x-4 space-y-2'>
             <button className="btn" onClick={this.formula}>Generate</button>
+            <button className="btn" onClick={this.clearField}>Empty fields</button>
+            <button className="btn" >Copy password</button>
           </section>
         </div>
         <div className='my-12 flex flex-col space-y-4'>
           <span className='font-bold text-3xl px-6'>Your password is </span>
           <code className='px-6' id='generated_pswd'></code>
-          <section className='flex space-x-3'>
-            <button className="btn w-1/5 mx-6">Copy password</button>
-            <button className="btn w-1/5 mx-6" onClick={this.clearField}>Clear Field</button>
-          </section>
         </div>
       </div>
     )
