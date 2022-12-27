@@ -86,15 +86,14 @@ export default class Page extends Component {
             }
         }
     }
-    copyToClip=()=>{
-        let field = document.getElementById('generated_pswd').innerHTML;
-        field.select();
-        field.setSelectionRange(0, 99999);
-        navigator.clipboard.writeText(field.innerHTML);
+    copyToClip=async()=>{
+        let field = await document.getElementById('generated_pswd').innerHTML;
+        navigator.clipboard.writeText(field)
+        alert("Password was copied!")
     }
     render() {
         return (
-            <div>
+            <div className='my-4'>
                 <h1 className='font-bold text-3xl px-6 py-6'>Password Generator</h1>
                 <div className='form_container grid space-y-6 px-6'>
                     <section className='grid grid-flow-col'>
@@ -115,11 +114,11 @@ export default class Page extends Component {
                     </section>
                 </div>
                 <div className='my-12 flex flex-col space-y-4'>
-                    <span className='font-bold text-3xl px-6'>Your password is </span>
-                    <code className='px-6' id='generated_pswd'></code>
+                    <span className='font-bold text-3xl px-6'>Your password is: </span>
+                    <code className='px-6 text-blue-900' id='generated_pswd'></code>
                 </div>
 
-                <section className='space-x-4 control_panel'>
+                <section className='space-x-4 px-6 control_panel'>
                     <button className="btn" onClick={this.formula}>Generate</button>
                     <button className="btn" onClick={this.clearField}>Empty fields</button>
                     <button className="btn" onClick={this.copyToClip}>Copy password</button>
