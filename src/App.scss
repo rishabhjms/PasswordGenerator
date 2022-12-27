@@ -46,3 +46,20 @@ button{
 .form_container>section{
     grid-template-columns: 2fr 8fr;
 }
+@media only screen and (max-width:768px){
+    .form_container>section{
+        grid-template-columns: initial;
+        grid-auto-flow: row;    
+    }
+    .control_panel{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        button.btn{
+            margin: 10px 0;
+            margin-left: 0 !important;
+            width: 80%;
+            
+        }
+    }
+}

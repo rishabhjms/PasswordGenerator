@@ -44,4 +44,21 @@ button:hover {
 
 .form_container > section {
   grid-template-columns: 2fr 8fr;
+}
+
+@media only screen and (max-width: 768px) {
+  .form_container > section {
+    grid-template-columns: initial;
+    grid-auto-flow: row;
+  }
+  .control_panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .control_panel button.btn {
+    margin: 10px 0;
+    margin-left: 0 !important;
+    width: 80%;
+  }
 }/*# sourceMappingURL=App.css.map */
