@@ -50,6 +50,13 @@ body {
   grid-template-columns: 2fr 8fr;
 }
 
+.navbar > section:first-child > ul {
+  height: 4rem;
+}
+.navbar > section:first-child > ul > li:not(:nth-child(1)) {
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 768px) {
   .form_container > section {
     grid-template-columns: initial;
@@ -64,5 +71,19 @@ body {
     margin: 10px 0;
     margin-left: 0 !important;
     width: 80%;
+  }
+  .navbar > section:first-child > ul {
+    height: auto;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .navbar > section:first-child > ul > li:nth-child(1) {
+    display: none;
+  }
+  .navbar > section:first-child > ul > li:not(:nth-child(1)) {
+    cursor: pointer;
+    margin-right: 0;
+    margin-left: 0;
+    padding: 1rem 2rem;
   }
 }/*# sourceMappingURL=App.css.map */

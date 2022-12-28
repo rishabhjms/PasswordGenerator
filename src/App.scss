@@ -1,4 +1,4 @@
-input{
+input {
     padding: 5px 12px;
     font-size: 14px;
     line-height: 20px;
@@ -11,15 +11,16 @@ input{
     border-radius: 6px;
     outline: none;
     box-shadow: rgba(225, 228, 232, 0.2) 0px 1px 0px 0px inset;
-    &:focus{
+
+    &:focus {
         border-color: #0366d6;
         outline: none;
         box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
     }
-    
+
 }
-button{
-    
+
+button {
     display: inline-block;
     outline: 0;
     cursor: pointer;
@@ -36,6 +37,7 @@ button{
     box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px 0px inset;
     transition: 0.2s cubic-bezier(0.3, 0, 0.5, 1);
     transition-property: color, background-color, border-color;
+
     &:hover {
         background-color: #111827;
         border-color: #1b1f2326;
@@ -43,26 +45,60 @@ button{
     }
 
 }
-body{
+
+body {
     background-color: #1b1f2326;
 }
-.form_container>section{
+
+.form_container>section {
     grid-template-columns: 2fr 8fr;
 }
-@media only screen and (max-width:768px){
-    .form_container>section{
-        grid-template-columns: initial;
-        grid-auto-flow: row;    
+
+.navbar {
+    &>section:first-child>ul {
+        height: 4rem;
+
+        &>li:not(:nth-child(1)) {
+            cursor: pointer;
+        }
     }
-    .control_panel{
+}
+
+@media only screen and (max-width:768px) {
+    .form_container>section {
+        grid-template-columns: initial;
+        grid-auto-flow: row;
+    }
+
+    .control_panel {
         display: flex;
         flex-direction: column;
         align-items: center;
-        button.btn{
+
+        button.btn {
             margin: 10px 0;
             margin-left: 0 !important;
             width: 80%;
-            
+
+        }
+    }
+
+    .navbar {
+        &>section:first-child>ul {
+            height: auto;
+            flex-direction: row;
+            align-items: flex-start;
+
+            &>li:nth-child(1) {
+                display: none;
+            }
+
+            &>li:not(:nth-child(1)) {
+                cursor: pointer;
+                margin-right: 0;
+                margin-left: 0;
+                padding: 1rem 2rem;
+            }
         }
     }
 }
