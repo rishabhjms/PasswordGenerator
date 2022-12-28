@@ -1,36 +1,13 @@
 import React, { Component } from 'react'
 
 export default class Page extends Component {
-    constructor() {
-        super();
-        this.state = {
-            passwordFieldIsEmpty: true
-        }
-    }
-    componentDidMount() {
-        //* Runs when the the component is mounded
-        const phrase_field = document.getElementById('phraseField')
-        if (!(phrase_field.value)) {
-            //* If the passphrase field was empty, then a default text shall be displayed
-            try {
-                //* document.getElementById('generated_pswd').innerHTML = 'fill the passphrase field'
-            } catch (err) {
-                console.error("can't set default text to generated_pswd")
-            }
-        }
-    }
-    clearField = () => {
+    clearField = async () => {
         document.getElementById('generated_pswd').innerHTML = ''
-        document.getElementById('phraseField').value = ''
-        document.getElementById('lengthField').value = ''
-        document.getElementById('codeField').value = ''
-        document.getElementById('special_chars_tickbox').checked = false
     }
-    formula = (event) => {
+    formula = async () => {
         //*Set customised value in field
         const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
         const field = document.getElementById('generated_pswd')
-        // const phrase_field = document.getElementById('phraseField')
         const codeField = document.getElementById('codeField')
         const lengthField = document.getElementById('lengthField')
         const special_chars = document.getElementById('special_chars_tickbox')
@@ -47,14 +24,13 @@ export default class Page extends Component {
                 }
                 if (special_chars.checked) {
                     //* Adds random special character if the checkbox is checked
-                    let binary = Math.random()
-                    if (binary < 0.5) {
+                    let binary = Math.floor(Math.random() * 10)
+                    if (binary < 5) {
                         binary = 0
                     } else {
                         binary = 1
                     }
                     if (index % 2 === 0) {
-                        console.log(index)
                         //* Generates an lowercase letter if the index is divisble by 2
                         if (binary === 0) {
                             //* if binary==0 then special character shall not be added
@@ -62,14 +38,14 @@ export default class Page extends Component {
                         } else if (binary === 1) {
                             //* if binary==1 then a special character will be added
                             let f1 = Math.floor(Math.random() * symbols.length)
+                            console.log("F1 ->", f1)
                             field.innerHTML += symbols[f1]
-                            lengthField.value = field.innerHTML.length
                         }
-                    } else if (index % 2 != 0) {
-                        console.log(index)
+                    } else if (index % 2 !== 0) {
                         if (binary === 0) {
                             //* if binary==0 then special character shall not be added
-                            field.innerHTML += alphabet[index].toLowerCase()
+                            field.innerHTML += alphabet[index].toUpperCase()
+                            console.warn("hey value of i was", alphabet[index].toUpperCase())
                         } else if (binary === 1) {
                             //* if binary==1 then a special character will be added
                             let f1 = Math.floor(Math.random() * symbols.length)
@@ -86,7 +62,7 @@ export default class Page extends Component {
             }
         }
     }
-    copyToClip=async()=>{
+    copyToClip = async () => {
         let field = await document.getElementById('generated_pswd').innerHTML;
         navigator.clipboard.writeText(field)
         alert("Password was copied!")
